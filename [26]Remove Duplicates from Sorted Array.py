@@ -66,5 +66,12 @@ class Solution(object):
             p += 1
             nums[p] = nums[q]
             q += 1
+        return nums
 
 # leetcode submit region end(Prohibit modification and deletion)
+
+
+s = Solution()
+# res = s.removeDuplicates([1, 1, 1, 2, 2, 3, 3, 3, 4, 5])
+res = s.removeDuplicates([1, 1, 2])
+print(res)
