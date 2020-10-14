@@ -1,29 +1,34 @@
-# Given a sorted array nums, remove the duplicates in-place such that each eleme
-# nt appear only once and return the new length. 
+# Given an array nums and a value val, remove all instances of that value in-pla
+# ce and return the new length. 
 # 
 #  Do not allocate extra space for another array, you must do this by modifying 
 # the input array in-place with O(1) extra memory. 
 # 
+#  The order of elements can be changed. It doesn't matter what you leave beyond
+#  the new length. 
+# 
 #  Example 1: 
 # 
 #  
-# Given nums = [1,1,2],
+# Given nums = [3,2,2,3], val = 3,
 # 
 # Your function should return length = 2, with the first two elements of nums be
-# ing 1 and 2 respectively.
+# ing 2.
 # 
-# It doesn't matter what you leave beyond the returned length. 
+# It doesn't matter what you leave beyond the returned length.
+#  
 # 
 #  Example 2: 
 # 
 #  
-# Given nums = [0,0,1,1,1,2,2,3,3,4],
+# Given nums = [0,1,2,2,3,0,4,2], val = 2,
 # 
-# Your function should return length = 5, with the first five elements of nums b
-# eing modified to 0, 1, 2, 3, and 4 respectively.
+# Your function should return length = 5, with the first five elements of nums c
+# ontaining 0, 1, 3, 0, and 4.
 # 
-# It doesn't matter what values are set beyond the returned length.
-#  
+# Note that the order of those five elements can be arbitrary.
+# 
+# It doesn't matter what values are set beyond the returned length. 
 # 
 #  Clarification: 
 # 
@@ -36,7 +41,7 @@
 # 
 #  
 # // nums is passed in by reference. (i.e., without making a copy)
-# int len = removeDuplicates(nums);
+# int len = removeElement(nums, val);
 # 
 # // any modification to nums in your function would be known by the caller.
 # // using the length returned by your function, it prints the first len element
@@ -44,35 +49,27 @@
 # for (int i = 0; i < len; i++) {
 #     print(nums[i]);
 # } Related Topics Array Two Pointers 
-#  👍 2725 👎 5464
+#  👍 1533 👎 2837
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution(object):
-    def removeDuplicates(self, nums):
+    def removeElement(self, nums, val):
         """
         :type nums: List[int]
+        :type val: int
         :rtype: int
         """
-        p, q = 0, 1
+        j = 0
+        for i in range(0, len(nums)):
+            if nums[i] != val:
+                nums[j] = nums[i]
+                j += 1
+        return j
 
-        while True:
-            if q >= len(nums):
-                return len(nums[:p]) + 1
-
-            if nums[p] == nums[q]:
-                q += 1
-                continue
-            p += 1
-            nums[p] = nums[q]
-            q += 1
-        return len(nums[:p]) + 1
-
-
-# leetcode submit region end(Prohibit modification and deletion)
+    # leetcode submit region end(Prohibit modification and deletion)
 
 
 s = Solution()
-# res = s.removeDuplicates([1, 1, 1, 2, 2, 3, 3, 3, 4, 5])
-res = s.removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])
+res = s.removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)
 print(res)
